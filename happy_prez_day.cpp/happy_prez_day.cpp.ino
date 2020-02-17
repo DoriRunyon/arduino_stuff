@@ -60,11 +60,11 @@ std::string morseEncode(char x) {
     return "";
 }
 
-void morseCode(std::string s, int ary[]) {
+void morseCode(std::string s, int ary[], const int timeUnit) {
     int aryPos = 0;
     for (int i = 0; i < s.length(); i++) {
         if (s[i] == ' ') {
-            ary[aryPos] = 700;
+            ary[aryPos] = timeUnit * 7;
             aryPos += 1;
         }
         else {
@@ -72,15 +72,15 @@ void morseCode(std::string s, int ary[]) {
             for (int j = 0; j < m.length(); j++) {
                 int val = 0;
                 if (m[j] == '.') {
-                    val = 100;
+                    val = timeUnit;
                 }
                 else {
-                    val = 300;
+                    val = timeUnit * 3;
                 }
                 ary[aryPos] = val;
                 aryPos += 1;
             }
-            ary[aryPos] = 300;
+            ary[aryPos] = timeUnit * 3;
             aryPos += 1;
         }
     }
@@ -100,22 +100,23 @@ void blinker(int highTime, int lowTime) {
 }
 
 void loop() {
+    const int timeUnit = 100;
     std::string s = "happy presidents day";
     // This only support 50 character strings
     int ary[255];
-    morseCode(s, ary);
+    morseCode(s, ary, timeUnit);
     for (int i = 0; i < s.length()*4; i++) {
         if (ary[i] == '\0') {
             break;
         }
-        blinker(ary[i], 100);
+        blinker(ary[i], timeUnit);
     }
 
-    // Happy 
+    // Happy
     //blinker(300, 190);
     //blinker(300, 700);
 
-    // Presidents 
+    // Presidents
     //blinker(300, 140);
     //blinker(300, 140);
     //blinker(300, 700);
