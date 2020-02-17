@@ -101,6 +101,7 @@ void blinker(int highTime, int lowTime) {
 
 void loop() {
     std::string s = "happy presidents day";
+    // This only support 50 character strings
     int ary[255];
     morseCode(s, ary);
     for (int i = 0; i < s.length()*4; i++) {
