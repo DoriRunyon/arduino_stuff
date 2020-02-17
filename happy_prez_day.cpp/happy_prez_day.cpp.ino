@@ -64,7 +64,7 @@ void morseCode(std::string s, int ary[], const int timeUnit) {
     int aryPos = 0;
     for (int i = 0; i < s.length(); i++) {
         if (s[i] == ' ') {
-            ary[aryPos] = timeUnit * 7;
+            ary[aryPos] = timeUnit * -7;
             aryPos += 1;
         }
         else {
@@ -80,7 +80,7 @@ void morseCode(std::string s, int ary[], const int timeUnit) {
                 ary[aryPos] = val;
                 aryPos += 1;
             }
-            ary[aryPos] = timeUnit * 3;
+            ary[aryPos] = timeUnit * -3;
             aryPos += 1;
         }
     }
@@ -93,6 +93,10 @@ void setup() {
 }
 
 void blinker(int highTime, int lowTime) {
+    if (highTime < 0) {
+        lowTime = highTime;
+        highTime = 0;
+    }
     digitalWrite(ledPin, HIGH);
     delay(highTime);
     digitalWrite(ledPin, LOW);
