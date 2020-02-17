@@ -97,8 +97,10 @@ void blinker(int highTime, int lowTime) {
         lowTime = highTime;
         highTime = 0;
     }
-    digitalWrite(ledPin, HIGH);
-    delay(highTime);
+    if (highTime) {
+        digitalWrite(ledPin, HIGH);
+        delay(highTime);
+    }
     digitalWrite(ledPin, LOW);
     delay(lowTime);
 }
