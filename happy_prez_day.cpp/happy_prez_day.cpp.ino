@@ -64,7 +64,7 @@ void morseCode(std::string s, int ary[]) {
     int aryPos = 0;
     for (int i = 0; i < s.length(); i++) {
         if (s[i] == ' ') {
-            ary[aryPos] = 7000;
+            ary[aryPos] = 700;
             aryPos += 1;
         }
         else {
