@@ -107,11 +107,11 @@ void blinker(int highTime, int lowTime) {
 
 void loop() {
     const int timeUnit = 100;
-    std::string s = "happy presidents day";
+    std::string s = "dori loves natey";
     // This only support 50 character strings
-    int ary[1024];
+    int ary[255];
     morseCode(s, ary, timeUnit);
-    for (int i = 0; i < 1024; i++) {
+    for (int i = 0; i < 255; i++) {
         if (ary[i] == '\0') {
             break;
         }
