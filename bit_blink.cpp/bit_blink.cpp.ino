@@ -1,5 +1,6 @@
 #include <string.h>
-int ledPin = 13;
+
+const int ledPin = 13;
 
 void morseEncode(char x, char *code) {
     switch (x) {
@@ -117,7 +118,6 @@ void loop() {
         int bitBucket[14] = {0};
         char code[5] = {'\0'};
         morseEncode(*s, code);
-        std::cout << code << std::endl;
         int len = strlen(code);
         if (len) {
             strToBits(code, len, bitBucket);
