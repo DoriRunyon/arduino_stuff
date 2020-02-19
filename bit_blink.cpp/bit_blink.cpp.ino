@@ -115,7 +115,7 @@ void loop() {
     long message = 0;
     //int shift =0;
     for (int i = s.length()-1; i > -1; i--) {
-        int bitBucket[13] = {0};
+        int bitBucket[14] = {0};
         std::string code = morseEncode(s[i]);
         if (code.length()) {
             strToBits(code, bitBucket);
