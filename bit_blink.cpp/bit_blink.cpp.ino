@@ -1,67 +1,66 @@
-#include <string>
+#include <string.h>
 int ledPin = 13;
 
-std::string morseEncode(char x) {
+void morseEncode(char x, char *code) {
     switch (x) {
     case 'a':
-        return ".-";
+        strcpy(code, ".-");
     case 'b':
-        return "-...";
+        strcpy(code, "-...");
     case 'c':
-	    return "-.-.";
+	    strcpy(code, "-.-.");
     case 'd':
-	    return "-..";
+	    strcpy(code, "-..");
     case 'e':
-	    return ".";
+	    strcpy(code, ".");
     case 'f':
-	    return "..-.";
+	    strcpy(code, "..-.");
     case 'g':
-	    return "--.";
+	    strcpy(code, "--.");
     case 'h':
-	    return "....";
+	    strcpy(code, "....");
     case 'i':
-	    return "..";
+	    strcpy(code, "..");
     case 'j':
-	    return ".---";
+	    strcpy(code, ".---");
     case 'k':
-	    return "-.-";
+	    strcpy(code, "-.-");
     case 'l':
-	    return ".-..";
+	    strcpy(code, ".-..");
     case 'm':
-	    return "--";
+	    strcpy(code, "--");
     case 'n':
-	    return "-.";
+	    strcpy(code, "-.");
     case 'o':
-	    return "---";
+	    strcpy(code, "---");
     case 'p':
-	    return ".--.";
+	    strcpy(code, ".--.");
     case 'q':
-	    return "--.-";
+	    strcpy(code, "--.-");
     case 'r':
-	    return ".-.";
+	    strcpy(code, ".-.");
     case 's':
-	    return "...";
+	    strcpy(code, "...");
     case 't':
-	    return "-";
+	    strcpy(code, "-");
     case 'u':
-	    return "..-";
+	    strcpy(code, "..-");
     case 'v':
-	    return "...-";
+	    strcpy(code, "...-");
     case 'w':
-	    return ".--";
+	    strcpy(code, ".--");
     case 'x':
-	    return "-..-";
+	    strcpy(code, "-..-");
     case 'y':
-	    return "-.--";
+	    strcpy(code, "-.--");
     case 'z':
-	    return "--..";
+	    strcpy(code, "--..");
     }
-    return "";
 }
 
-void strToBits(std::string morse, int bits[]) {
+void strToBits(char *morse, int len, int bits[]) {
     int aryPos = 0;
-    for (int i = morse.length()-1; i > -1; i--) {
+    for (int i = len - 1; i > -1; i--) {
         if (morse[i] == '.') {
             bits[aryPos++] = 1;
         }
@@ -92,7 +91,7 @@ long bitSchwifty(int bits[], long message) {
 }
 
 void setup() {
-    pinMode(ledPin, OUTPUT);
+    //pinMode(ledPin, OUTPUT);
 }
 
 void blinker(long message, const int unit) {
@@ -111,14 +110,17 @@ void blinker(long message, const int unit) {
 
 void loop() {
     const int timeUnit = 200;
-    std::string s = "dori";
+    char *s = "dori";
+    int slen = strlen(s);
     long message = 0;
-    //int shift =0;
-    for (int i = s.length()-1; i > -1; i--) {
+    for (int i = slen-1; i > -1; i--, s++) {
         int bitBucket[14] = {0};
-        std::string code = morseEncode(s[i]);
-        if (code.length()) {
-            strToBits(code, bitBucket);
+        char code[5] = {'\0'};
+        morseEncode(*s, code);
+        std::cout << code << std::endl;
+        int len = strlen(code);
+        if (len) {
+            strToBits(code, len, bitBucket);
         }
         else {
             if (i > 0) {
