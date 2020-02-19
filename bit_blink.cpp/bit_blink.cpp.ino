@@ -99,7 +99,7 @@ void blinker(long message, const int unit) {
     while (message) {
         if (message & 1) {
             digitalWrite(ledPin, HIGH);
-            delay(highTime);
+            delay(unit);
         }
         else {
             digitalWrite(ledPin, LOW);
